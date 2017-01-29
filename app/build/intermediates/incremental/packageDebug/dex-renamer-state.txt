@@ -1,0 +1,7 @@
+#Sun Jan 29 13:51:58 ICT 2017
+base.0=C\:\\Users\\win\\Desktop\\MyProject\\Android-GoogleDirectionLibrary-master\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\instant-run-bootstrap_9e9b2de1630b992d6b769c17d6a8df3081ced53b
+renamed.1=classes.dex
+renamed.0=classes2.dex
+file.1=C\:\\Users\\win\\Desktop\\MyProject\\Android-GoogleDirectionLibrary-master\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\instant-run_d550d3be4edbcf8d98270ecd3ebc52ce792ea980\\classes.dex
+base.1=C\:\\Users\\win\\Desktop\\MyProject\\Android-GoogleDirectionLibrary-master\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\instant-run_d550d3be4edbcf8d98270ecd3ebc52ce792ea980
+file.0=C\:\\Users\\win\\Desktop\\MyProject\\Android-GoogleDirectionLibrary-master\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10\\instant-run-bootstrap_9e9b2de1630b992d6b769c17d6a8df3081ced53b\\classes.dex
