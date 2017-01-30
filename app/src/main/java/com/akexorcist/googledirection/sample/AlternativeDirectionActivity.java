@@ -38,7 +38,7 @@ public class AlternativeDirectionActivity extends AppCompatActivity implements O
     private LatLng camera ;// = new LatLng(35.1773909, 136.9471357);
     private LatLng origin ;//= new LatLng(35.1766982, 136.9413508);
     private LatLng destination;//= new LatLng(35.1800441, 136.9532567);
-    private String[] colors = {"#7fff7272", "#7f31c7c5", "#7fff8a00"};
+    private String[] colors = {"#7fff7272", "#7f31c7c5", "#7fff8a00"}; //ระบสี
     private Double startLatADouble = 0.0, startLngADouble = 0.0;
     private Double endLatADouble , endLngADouble;
     private LocationManager locationManager;
@@ -234,7 +234,7 @@ public class AlternativeDirectionActivity extends AppCompatActivity implements O
         GoogleDirection.withServerKey(serverKey)
                 .from(origin)
                 .to(destination)
-                .transportMode(TransportMode.WALKING)
+                .transportMode(TransportMode.DRIVING) //select mode travel
                 .alternativeRoute(true)
                 .execute(this);
     }
@@ -243,17 +243,21 @@ public class AlternativeDirectionActivity extends AppCompatActivity implements O
     public void onDirectionSuccess(Direction direction, String rawBody) {
         Snackbar.make(btnRequestDirection, "Success with status : " + direction.getStatus(), Snackbar.LENGTH_SHORT).show();
         if (direction.isOK()) {
-            googleMap.addMarker(new MarkerOptions().position(origin));
-            googleMap.addMarker(new MarkerOptions().position(destination));
+//            googleMap.addMarker(new MarkerOptions().position(origin));
+//            googleMap.addMarker(new MarkerOptions().position(destination));
+
+            //getRouteList หาจำนวนเส้นทาง
+            Log.d("30janV2","จำนวนเส้นทางที่ google แนะนำา "+direction.getRouteList().size());
 
             for (int i = 0; i < direction.getRouteList().size(); i++) {
                 Route route = direction.getRouteList().get(i);
-                String color = colors[i % colors.length];
+                String color = colors[i % colors.length]; //เส้นทางถูกจำกัด
                 ArrayList<LatLng> directionPositionList = route.getLegList().get(0).getDirectionPoint();
                 googleMap.addPolyline(DirectionConverter.createPolyline(this, directionPositionList, 5, Color.parseColor(color)));
+                //addPolyline สร้างเส้น
             }
 
-            btnRequestDirection.setVisibility(View.GONE);
+//            btnRequestDirection.setVisibility(View.GONE); ==> Hide ป่ม เพื่อทำให้ืำการ เลือก ได้ใหม่
         }
     }
 
