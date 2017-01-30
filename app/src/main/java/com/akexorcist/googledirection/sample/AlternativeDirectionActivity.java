@@ -25,6 +25,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
@@ -34,11 +35,12 @@ public class AlternativeDirectionActivity extends AppCompatActivity implements O
     private Button btnRequestDirection;
     private GoogleMap googleMap;
     private String serverKey = "AIzaSyDkxXWseLD9nGDV81y6DgBA1PLbwp5tzwU";
-    private LatLng camera = new LatLng(35.1773909, 136.9471357);
-    private LatLng origin = new LatLng(35.1766982, 136.9413508);
-    private LatLng destination = new LatLng(35.1800441, 136.9532567);
+    private LatLng camera ;// = new LatLng(35.1773909, 136.9471357);
+    private LatLng origin ;//= new LatLng(35.1766982, 136.9413508);
+    private LatLng destination;//= new LatLng(35.1800441, 136.9532567);
     private String[] colors = {"#7fff7272", "#7f31c7c5", "#7fff8a00"};
     private Double startLatADouble = 0.0, startLngADouble = 0.0;
+    private Double endLatADouble , endLngADouble;
     private LocationManager locationManager;
     private Criteria criteria;
 
@@ -172,12 +174,51 @@ public class AlternativeDirectionActivity extends AppCompatActivity implements O
         }
     };
 
-
-
     @Override
-    public void onMapReady(GoogleMap googleMap) {
+    //ทำการดแลเกี่ยวกัที่
+    public void onMapReady(final GoogleMap googleMap) {
         this.googleMap = googleMap;
+
+        //set up center map
+        camera = new LatLng(startLatADouble, startLngADouble);
+
         googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(camera, 15));
+
+        //การสร้าง marker ของ user ==> สร้างจุดเริมตินเป็น marker
+        createMarkerUser();
+
+        //get event click map
+        googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+            @Override
+            public void onMapClick(LatLng latLng) {
+
+                googleMap.clear();
+
+                createMarkerUser(); //refresh marker
+
+                createMakerDestination(latLng);
+
+            } //onMapClick
+        });
+
+    }
+
+    private void createMakerDestination(LatLng latLng) {
+
+        googleMap.addMarker(new MarkerOptions()
+                .position(latLng)
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)));;
+        endLatADouble = latLng.latitude;
+        endLngADouble = latLng.longitude;
+        Log.d("30janV1","Destination Lat ==> "+endLatADouble);
+        Log.d("30janV1","Destination Lng ==> "+endLngADouble);
+        destination = new LatLng(endLatADouble,endLngADouble);
+
+    } // createMakerDestination
+
+    private void createMarkerUser() {
+        origin = new LatLng(startLatADouble, startLngADouble);
+        googleMap.addMarker(new MarkerOptions().position(origin));
     }
 
     @Override
