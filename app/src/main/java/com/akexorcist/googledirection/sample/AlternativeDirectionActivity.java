@@ -244,7 +244,7 @@ public class AlternativeDirectionActivity extends AppCompatActivity implements O
     @Override
     public void onDirectionSuccess(Direction direction, String rawBody) {
         Snackbar.make(btnRequestDirection, "Success with status : " + direction.getStatus(), Snackbar.LENGTH_SHORT).show();
-        Polyline polyLine = null;
+        Polyline[] polylines = new Polyline[direction.getRouteList().size()];
 
         if (direction.isOK()) {
 //            googleMap.addMarker(new MarkerOptions().position(origin));
@@ -258,14 +258,17 @@ public class AlternativeDirectionActivity extends AppCompatActivity implements O
                 String color = colors[i % colors.length]; //เส้นทางถูกจำกัด
                 ArrayList<LatLng> directionPositionList = route.getLegList().get(0).getDirectionPoint();
                 //googleMap.addPolyline(DirectionConverter.createPolyline(this, directionPositionList, 5, Color.parseColor(color)));
-                polyLine = googleMap.addPolyline(DirectionConverter.createPolyline(this, directionPositionList, 15, Color.parseColor(color)));
+                polylines[i] = googleMap.addPolyline(DirectionConverter.createPolyline(this, directionPositionList, 15, Color.parseColor(color)));
+                polylines[i].setClickable(true);
+
+
                 //addPolyline สร้างเส้น
             } //for
 
 //            btnRequestDirection.setVisibility(View.GONE); ==> Hide ป่ม เพื่อทำให้ืำการ เลือก ได้ใหม่
         } //if
 
-        polyLine.setClickable(true);
+
         googleMap.setOnPolylineClickListener(new GoogleMap.OnPolylineClickListener() {
             @Override
             public void onPolylineClick(Polyline polyline) {

@@ -5,7 +5,7 @@
     density="xhdpi"
     format="8"
     plugin-version="2.2.3"
-    timestamp="41800463742444"
+    timestamp="42593322763879"
     token="3683761057924408557"
     verifier="COLD_SWAP_REQUESTED" >
 
@@ -53,14 +53,14 @@
             type="RESOURCES" />
     </build>
     <build
-        timestamp="41750614405801"
+        timestamp="42537491849799"
         verifier="COLD_SWAP_REQUESTED" >
         <artifact
             location="C:\Users\win\Desktop\MyProject\Android-GoogleDirectionLibrary-master\app\build\intermediates\transforms\dex\debug\folders\1000\5\slice_0\classes.dex"
             type="DEX" />
     </build>
     <build
-        timestamp="41800463742444"
+        timestamp="42593322763879"
         verifier="COLD_SWAP_REQUESTED" />
     <build
         timestamp="64415369575795"
