@@ -1,6 +1,8 @@
 package com.akexorcist.googledirection.sample;
 
 import android.Manifest;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Criteria;
@@ -12,8 +14,11 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import com.akexorcist.googledirection.DirectionCallback;
 import com.akexorcist.googledirection.GoogleDirection;
@@ -44,7 +49,9 @@ public class AlternativeDirectionActivity extends AppCompatActivity implements O
     private Double endLatADouble , endLngADouble;
     private LocationManager locationManager;
     private Criteria criteria;
-
+    private EditText originEditText, destinationEditText;
+    private String originString, destinationString;
+    private MyManage myManage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +67,7 @@ public class AlternativeDirectionActivity extends AppCompatActivity implements O
         criteria.setAccuracy(Criteria.ACCURACY_FINE);
         criteria.setAltitudeRequired(false);
         criteria.setBearingRequired(false);
+        myManage = new MyManage(AlternativeDirectionActivity.this);
 
 
         ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map)).getMapAsync(this);
@@ -147,7 +155,6 @@ public class AlternativeDirectionActivity extends AppCompatActivity implements O
         }
         return location;
     }
-
 
 
     //get Location
@@ -240,7 +247,6 @@ public class AlternativeDirectionActivity extends AppCompatActivity implements O
                 .execute(this);
     }
 
-
     @Override
     public void onDirectionSuccess(Direction direction, String rawBody) {
         Snackbar.make(btnRequestDirection, "Success with status : " + direction.getStatus(), Snackbar.LENGTH_SHORT).show();
@@ -260,6 +266,7 @@ public class AlternativeDirectionActivity extends AppCompatActivity implements O
                 //googleMap.addPolyline(DirectionConverter.createPolyline(this, directionPositionList, 5, Color.parseColor(color)));
                 polylines[i] = googleMap.addPolyline(DirectionConverter.createPolyline(this, directionPositionList, 15, Color.parseColor(color)));
                 polylines[i].setClickable(true);
+                polylines[i].setZIndex(i);
 
 
                 //addPolyline สร้างเส้น
@@ -273,9 +280,54 @@ public class AlternativeDirectionActivity extends AppCompatActivity implements O
             @Override
             public void onPolylineClick(Polyline polyline) {
                 Log.d("30janV2","Clik Polyline OK");
+                Log.d("30janV2","Index ==> "+polyline.getZIndex());
+                int index = (int) polyline.getZIndex();
+//                Toast.makeText(AlternativeDirectionActivity.this,"คุณเลือกเส้นทางที่ : "+Integer.toString(index),Toast.LENGTH_SHORT).show();
+                myAlertDiaglog(index);
+
+
             }
         });
     }
+
+    private void myAlertDiaglog(int index) {
+        AlertDialog.Builder bulider = new AlertDialog.Builder(AlternativeDirectionActivity.this);
+        bulider.setCancelable(false);
+        bulider.setIcon(R.drawable.doremon48);
+        bulider.setTitle("ข้อมลที่ต้องการบันทึก");
+
+        LayoutInflater layoutInflater = AlternativeDirectionActivity.this.getLayoutInflater();
+        final View view = layoutInflater.inflate(R.layout.mylayout, null);
+        bulider.setView(view);
+        bulider.setMessage("คุณเลือกเส้นทาง : " + Integer.toString(index));
+
+        bulider.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        bulider.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                //Bind widget
+                originEditText = (EditText) view.findViewById(R.id.editText);
+                destinationEditText = (EditText) view.findViewById(R.id.editText2);
+
+                originString = originEditText.getText().toString().trim();
+                destinationString = destinationEditText.getText().toString().trim();
+
+                Log.d("30janV2", "Origin ==>" + originString);
+                Log.d("30janV2", "Destinaton ==>" + destinationString);
+
+                dialog.dismiss();
+            }
+        });
+
+        bulider.show();
+
+    } //myAlertDialog
 
     @Override
     public void onDirectionFailure(Throwable t) {

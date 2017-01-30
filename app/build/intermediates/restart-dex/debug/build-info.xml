@@ -5,22 +5,26 @@
     density="xhdpi"
     format="8"
     plugin-version="2.2.3"
-    timestamp="42593322763879"
+    timestamp="54369311101542"
     token="3683761057924408557"
     verifier="COLD_SWAP_REQUESTED" >
 
     <task
         name="javac"
-        duration="0" />
+        duration="1072" />
     <task
         name="instant-run-dex"
         duration="0" />
     <task
         name="instant-run-transform"
-        duration="0" />
+        duration="128" />
     <task
         name="verifier"
-        duration="0" />
+        duration="25" />
+
+    <artifact
+        location="C:\Users\win\Desktop\MyProject\Android-GoogleDirectionLibrary-master\app\build\intermediates\transforms\dex\debug\folders\1000\5\slice_0\classes.dex"
+        type="DEX" />
 
     <build
         timestamp="34682420075509"
@@ -38,6 +42,13 @@
         <artifact
             location="C:\Users\win\Desktop\MyProject\Android-GoogleDirectionLibrary-master\app\build\intermediates\transforms\dex\debug\folders\1000\5\slice_7\classes.dex"
             type="DEX" />
+    </build>
+    <build
+        timestamp="53169322566077"
+        verifier="COLD_SWAP_REQUESTED" >
+        <artifact
+            location="C:\Users\win\Desktop\MyProject\Android-GoogleDirectionLibrary-master\app\build\intermediates\instant-run-resources\resources-debug.ir.ap_"
+            type="RESOURCES" />
         <artifact
             location="C:\Users\win\Desktop\MyProject\Android-GoogleDirectionLibrary-master\app\build\intermediates\transforms\dex\debug\folders\1000\5\slice_4\classes.dex"
             type="DEX" />
@@ -46,22 +57,12 @@
             type="DEX" />
     </build>
     <build
-        timestamp="41531137612213"
-        verifier="COLD_SWAP_REQUESTED" >
-        <artifact
-            location="C:\Users\win\Desktop\MyProject\Android-GoogleDirectionLibrary-master\app\build\intermediates\instant-run-resources\resources-debug.ir.ap_"
-            type="RESOURCES" />
-    </build>
-    <build
-        timestamp="42537491849799"
+        timestamp="54369311101542"
         verifier="COLD_SWAP_REQUESTED" >
         <artifact
             location="C:\Users\win\Desktop\MyProject\Android-GoogleDirectionLibrary-master\app\build\intermediates\transforms\dex\debug\folders\1000\5\slice_0\classes.dex"
             type="DEX" />
     </build>
-    <build
-        timestamp="42593322763879"
-        verifier="COLD_SWAP_REQUESTED" />
     <build
         timestamp="64415369575795"
         verifier="FULL_BUILD_REQUESTED" >
