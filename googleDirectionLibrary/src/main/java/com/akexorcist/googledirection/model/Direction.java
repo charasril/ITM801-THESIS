@@ -26,6 +26,8 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
+//import com.google.gson.annotations.SerializedName;
+
 /**
  * Created by Akexorcist on 11/29/15 AD.
  */
